@@ -9,7 +9,7 @@ namespace Employee_Management_System_Backend.Data
 {
     public class ApplicationDBContext : DbContext
     {
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> dbContextOptions) : base(dbContextOptions)
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options)
         {
 
         }
