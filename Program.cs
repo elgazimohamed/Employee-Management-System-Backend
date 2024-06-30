@@ -1,6 +1,7 @@
 using Employee_Management_System_Backend.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Builder;
+using Employee_Management_System_Backend.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));

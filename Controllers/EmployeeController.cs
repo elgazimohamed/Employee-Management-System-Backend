@@ -1,5 +1,6 @@
 using Employee_Management_System_Backend.Data;
 using Employee_Management_System_Backend.Models;
+using Employee_Management_System_Backend.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Management_System_Backend.Controllers
@@ -8,28 +9,67 @@ namespace Employee_Management_System_Backend.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly ApplicationDBContext _context;
-        public EmployeeController(ApplicationDBContext context)
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService employeeService)
         {
-            _context = context;
+            _employeeService = employeeService ?? throw new ArgumentNullException(nameof(employeeService));
         }
 
+
         [HttpGet]
-        public IActionResult GetAllEmployees()
+        public async Task<IActionResult> GetAllEmployees()
         {
-            var employees = _context.Employees.ToList(); // get all employees from the database
-            return Ok(employees);  // return all employees
+            var employees = await _employeeService.GetAllEmployees();
+            return Ok(employees);
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetEmployeeById([FromRoute] int id)
+        public async Task<IActionResult> GetById([FromRoute] Guid id)
         {
-            var employee = _context.Employees.Find(id); // get employee by id
+            var employee = await _employeeService.GetEmployeeById(id);
             if (employee == null)
             {
-                return NotFound(); // return 404 Not Found
+                return NotFound();
             }
-            return Ok(employee); // return employee by id    
+            return Ok(employee);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] Employee employee)
+        {
+            var result = await _employeeService.Add(employee);
+            if (!result)
+            {
+                return BadRequest("Email already in use.");
+            }
+            return Ok("Employee added successfully.");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, Employee employee)
+        {
+            if (id != employee.Id)
+            {
+                return BadRequest("Employee ID mismatch.");
+            }
+            var result = await _employeeService.Update(employee);
+            if (!result)
+            {
+                return BadRequest("Email already in use by another employee.");
+            }
+            return Ok("Employee updated successfully.");
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] Guid id)
+        {
+            var result = await _employeeService.Delete(id);
+            if (!result)
+            {
+                return NotFound("Employee not found.");
+            }
+            return Ok("Employee deleted successfully.");
         }
 
     }

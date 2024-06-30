@@ -7,8 +7,8 @@ namespace Employee_Management_System_Backend.Services
     {
         Task<IEnumerable<Employee>> GetAllEmployees();
         Task<Employee?> GetEmployeeById(Guid id);
-        Task Create(Employee employee);
-        Task Update(Employee employee);
-        Task Delete(Guid id);
+        Task<bool> Add(Employee employee);
+        Task<bool> Update(Employee employee);
+        Task<bool> Delete(Guid id);
     }
 }

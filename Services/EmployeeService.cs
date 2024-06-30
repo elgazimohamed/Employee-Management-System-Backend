@@ -1,7 +1,6 @@
 using System;
 using Employee_Management_System_Backend.Data;
 using Employee_Management_System_Backend.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace Employee_Management_System_Backend.Services
@@ -24,24 +23,42 @@ namespace Employee_Management_System_Backend.Services
         {
             return await _context.Employees.FindAsync(id);
         }
-        public async Task Create(Employee employee)
+
+        public async Task<bool> Add(Employee employee)
         {
+            if (await _context.Employees.AnyAsync(e => e.Email == employee.Email))
+            {
+                return false; // Email already in use
+            }
+
             await _context.Employees.AddAsync(employee);
             await _context.SaveChangesAsync();
+            return true; // Employee added successfully
         }
-        public async Task Update(Employee employee)
+
+        public async Task<bool> Update(Employee employee)
         {
+            if (await _context.Employees.AnyAsync(e => e.Email == employee.Email && e.Id != employee.Id))
+            {
+                return false; // Email already in use by another employee
+            }
+
             _context.Employees.Update(employee);
             await _context.SaveChangesAsync();
+            return true; // Employee updated successfully
         }
-        public async Task Delete(Guid id)
+
+        public async Task<bool> Delete(Guid id)
         {
             var employee = await _context.Employees.FindAsync(id);
-            if (employee != null)
+            if (employee == null)
             {
-                _context.Employees.Remove(employee);
-                await _context.SaveChangesAsync();
+                return false; // Employee not found
             }
+
+            _context.Employees.Remove(employee);
+            await _context.SaveChangesAsync();
+            return true; // Employee deleted successfully
         }
     }
 }
