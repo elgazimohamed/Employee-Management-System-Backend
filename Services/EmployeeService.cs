@@ -26,26 +26,48 @@ namespace Employee_Management_System_Backend.Services
 
         public async Task<bool> Add(Employee employee)
         {
-            if (await _context.Employees.AnyAsync(e => e.Email == employee.Email))
+            try
             {
-                return false; // Email already in use
+                if (await _context.Employees.AnyAsync(e => e.Email == employee.Email))
+                {
+                    return false; // Email already in use
+                }
+
+                // Ensure the employee Id is set if not provided
+                if (employee.Id == Guid.Empty)
+                {
+                    employee.Id = Guid.NewGuid();
+                }
+
+                _context.Employees.Add(employee);
+                await _context.SaveChangesAsync();
+
+                return true; // Employee added successfully
             }
-
-            await _context.Employees.AddAsync(employee);
-            await _context.SaveChangesAsync();
-            return true; // Employee added successfully
+            catch (Exception ex)
+            {
+                // Log the exception
+                throw new Exception("Error when adding a new employee: ", ex);
+            }
         }
-
         public async Task<bool> Update(Employee employee)
         {
-            if (await _context.Employees.AnyAsync(e => e.Email == employee.Email && e.Id != employee.Id))
+            try
             {
-                return false; // Email already in use by another employee
-            }
+                if (await _context.Employees.AnyAsync(e => e.Email == employee.Email && e.Id != employee.Id))
+                {
+                    return false; // Email already in use by another employee
+                }
 
-            _context.Employees.Update(employee);
-            await _context.SaveChangesAsync();
-            return true; // Employee updated successfully
+                _context.Employees.Update(employee);
+                await _context.SaveChangesAsync();
+                return true; // Employee updated successfully
+            }
+            catch (Exception ex)
+            {
+                // Log the exception
+                throw new Exception("Error when updating the employee : ", ex);
+            }
         }
 
         public async Task<bool> Delete(Guid id)
@@ -60,5 +82,7 @@ namespace Employee_Management_System_Backend.Services
             await _context.SaveChangesAsync();
             return true; // Employee deleted successfully
         }
+
+
     }
 }

@@ -41,22 +41,18 @@ namespace Employee_Management_System_Backend.Controllers
             var result = await _employeeService.Add(employee);
             if (!result)
             {
-                return BadRequest("Email already in use.");
+                return BadRequest("This email is already associated with another account.");
             }
             return Ok("Employee added successfully.");
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(Guid id, Employee employee)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] Employee employee)
         {
-            if (id != employee.Id)
-            {
-                return BadRequest("Employee ID mismatch.");
-            }
             var result = await _employeeService.Update(employee);
             if (!result)
             {
-                return BadRequest("Email already in use by another employee.");
+                return BadRequest("This email is already associated with another account.");
             }
             return Ok("Employee updated successfully.");
         }
