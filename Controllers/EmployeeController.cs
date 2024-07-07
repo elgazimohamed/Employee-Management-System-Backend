@@ -41,9 +41,9 @@ namespace Employee_Management_System_Backend.Controllers
             var result = await _employeeService.Add(employee);
             if (!result)
             {
-                return BadRequest("This email is already associated with another account.");
+                return BadRequest(new { message = "This email is already associated with another account." });
             }
-            return Ok("Employee added successfully.");
+            return Ok(new { message = "Employee added successfully." });
         }
 
         [HttpPut]
@@ -52,9 +52,9 @@ namespace Employee_Management_System_Backend.Controllers
             var result = await _employeeService.Update(employee);
             if (!result)
             {
-                return BadRequest("This email is already associated with another account.");
+                return BadRequest(new { message = "This email is already associated with another account." });
             }
-            return Ok("Employee updated successfully.");
+            return Ok(new { message = "Employee updated successfully." });
         }
 
         [HttpDelete("{id}")]
@@ -65,7 +65,8 @@ namespace Employee_Management_System_Backend.Controllers
             {
                 return NotFound("Employee not found.");
             }
-            return Ok("Employee deleted successfully.");
+            return Ok(new { message = "Employee deleted successfully." });
+
         }
 
     }

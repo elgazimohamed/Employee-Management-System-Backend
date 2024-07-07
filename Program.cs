@@ -1,8 +1,6 @@
 using Employee_Management_System_Backend.Data;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Builder;
 using Employee_Management_System_Backend.Services;
-
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +16,21 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        policyBuilder =>
+        {
+            policyBuilder.AllowAnyOrigin()
+                         .AllowAnyHeader()
+                         .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
+
+// Use CORS policy
+app.UseCors("AllowAllOrigins");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -27,7 +39,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+var port = builder.Configuration["Kestrel:Endpoints:Https:Url"];
+if (!string.IsNullOrEmpty(port))
+{
+    app.Logger.LogInformation($"HTTPS Redirection to port: {port}");
+}
+else
+{
+    app.Logger.LogWarning("HTTPS Redirection port is not set.");
+}
 
 app.MapControllers();
 
