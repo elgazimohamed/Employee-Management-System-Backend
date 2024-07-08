@@ -50,11 +50,17 @@ To get a local copy up and running, follow these simple steps.
 
    ```sh
    dotnet run
-2. **API Endpoints**
 
-- `GET /api/employee`: Get all employees.
-- `GET /api/employee/{id}`: Get an employee by ID.
-- `POST /api/employee`: Add a new employee.
-- `PUT /api/employee/{id}`: Update an existing employee.
-- `DELETE /api/employee/{id}`: Delete an employee by ID.
+1. **Visit this link to view and test the APIs with Swagger UI**
+
+   ```sh
+   http://localhost:5079/swagger/index.html
+
+3. **API Endpoints**
+
+- `GET /api/employee` : Get all employees.
+- `GET /api/employee/{id}` : Get an employee by ID.
+- `POST /api/employee` : Add a new employee.
+- `PUT /api/employee/{id}` : Update an existing employee.
+- `DELETE /api/employee/{id}` : Delete an employee by ID.
    
