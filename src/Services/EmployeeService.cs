@@ -1,4 +1,3 @@
-using System;
 using Employee_Management_System_Backend.Data;
 using Employee_Management_System_Backend.Models;
 using Microsoft.EntityFrameworkCore;
