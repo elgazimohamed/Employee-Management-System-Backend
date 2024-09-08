@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\A CER\\Desktop\\Employee-Management-System\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj": {}
+    "C:\\Users\\A CER\\Desktop\\my-workspace\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj": {}
   },
   "projects": {
-    "C:\\Users\\A CER\\Desktop\\Employee-Management-System\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj": {
+    "C:\\Users\\A CER\\Desktop\\my-workspace\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\A CER\\Desktop\\Employee-Management-System\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj",
+        "projectUniqueName": "C:\\Users\\A CER\\Desktop\\my-workspace\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj",
         "projectName": "Employee-Management-System-Backend",
-        "projectPath": "C:\\Users\\A CER\\Desktop\\Employee-Management-System\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj",
+        "projectPath": "C:\\Users\\A CER\\Desktop\\my-workspace\\Employee-Management-System-Backend\\Employee-Management-System-Backend.csproj",
         "packagesPath": "C:\\Users\\A CER\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\A CER\\Desktop\\Employee-Management-System\\Employee-Management-System-Backend\\obj\\",
+        "outputPath": "C:\\Users\\A CER\\Desktop\\my-workspace\\Employee-Management-System-Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\A CER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -22,6 +22,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -45,37 +46,45 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.AspNetCore.Cors": {
               "target": "Package",
               "version": "[2.2.0, )"
             },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.6, )"
+              "version": "[8.0.8, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.7.3, )"
             }
           },
           "imports": [
@@ -97,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.302/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

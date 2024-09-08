@@ -1,12 +1,14 @@
 using Employee_Management_System_Backend.Data;
 using Employee_Management_System_Backend.Models;
 using Employee_Management_System_Backend.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Employee_Management_System_Backend.Controllers
 {
     [Route("api/employee")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeService _employeeService;
